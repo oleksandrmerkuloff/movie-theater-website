@@ -131,6 +131,10 @@ class Movie(models.Model):
         blank=True,
         null=True
     )
+    in_theater = models.BooleanField(
+        blank=True,
+        default=False
+    )
     original_name = models.CharField(
         max_length=100,
         blank=True,
@@ -216,4 +220,4 @@ class Movie(models.Model):
     class Meta:
         verbose_name = 'Movie'
         verbose_name_plural = 'Movies'
-        ordering = ('-release_at', 'name')
+        ordering = ('-release_at', 'name', 'in_theater')
