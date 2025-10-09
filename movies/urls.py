@@ -1,6 +1,9 @@
 from django.urls import path
 
 
+from movies.views import HomePageView, DetailMovieView, SoonPageView, GenreView
+
+
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path(
