@@ -24,14 +24,14 @@ class Cart(models.Model):
 
     @property
     def total(self):
-        return sum(item.price * item.quantity for item in self.items.all())
+        return sum(item.total for item in self.items.all())  # type: ignore
 
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
-        related_name='item'
+        related_name='items'
     )
     product = models.ForeignKey(
         Product,
@@ -44,20 +44,19 @@ class CartItem(models.Model):
         ],
         null=False
     )
-    price = models.DecimalField(
-        blank=True,
-        max_digits=6,
-        decimal_places=2
-    )
-    added_at = models.DateTimeField(auto_now_add=True)
+    price = models.PositiveIntegerField()
 
-    def save(self, *args, **kwargs) -> None:
-        self.price = self.product.price
-        return super().save(*args, **kwargs)
+    @property
+    def total(self):
+        return self.price * self.quantity
 
     def __str__(self) -> str:
         return f'{self.product} in {self.cart}'
 
+    def save(self, *args, **kwargs) -> None:
+        if not self.price:
+            self.price = self.product.price
+        return super().save(*args, **kwargs)
+
     class Meta:
-        ordering = ['-added_at']
         unique_together = ('cart', 'product',)

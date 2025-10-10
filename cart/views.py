@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import DetailView
 
-# Create your views here.
+from cart.models import Cart
+
+
+class CartView(DetailView):
+    model = Cart
+    context_object_name = 'cart'
+    template_name = 'cart-page.html'
