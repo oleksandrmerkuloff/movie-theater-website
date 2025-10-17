@@ -60,17 +60,8 @@ class MovieAdmin(admin.ModelAdmin):
     list_per_page = 30
     readonly_fields = ['id', 'viewer_rating', 'critics_rating']
     search_fields = [
-        'name', 'director__full_name', 'original_name', 'studio__name'
+        'name',
     ]
-    autocomplete_fields = [
-        'director',
-        'language',
-        'genre',
-        'country',
-        'studio',
-        'screenplay',
-        'starring'
-        ]
 
 
 admin.site.register(Actor)

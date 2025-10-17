@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['in_stock']
     readonly_fields = ['added_at', 'id']
     search_fields = ['name', 'price']
-    list_filter = ['in_stock', '-added_at', 'price']
+    list_filter = ['in_stock', 'price']
     list_per_page = 30
 
 

@@ -16,9 +16,6 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email) if email else None,
             fname=kwargs['fname'],
             lname=kwargs['lname'],
-            sex=kwargs['sex'],
-            birthday=kwargs['birthday'],
-            client_type=kwargs['client_type']
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -27,6 +24,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, phone, password=None, **kwargs):
         user = self.create_user(phone, password, **kwargs)
         user.is_admin = True
+        user.client_type = 'emp'
         user.save(using=self._db)
         return user
 
@@ -57,7 +55,7 @@ class User(AbstractBaseUser):
         ],
         default='o',
     )
-    birthday = models.DateField()
+    birthday = models.DateField(blank=True, null=True)
     client_type = models.CharField(
         max_length=50,
         choices=[

@@ -179,7 +179,7 @@ class Movie(models.Model):
         related_name='movies',
     )
     duration = models.DecimalField(
-        max_digits=2,
+        max_digits=4,
         decimal_places=2,
         blank=True,
         default=Decimal('0.00')
