@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block style %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header id="main-header">
+      <button id="menuBtn">☰</button>
+      <div id="sideMenu" class="side-menu">
+        <button id="closeBtn">×</button>
+        <img src="{% static 'images/logo.png' %}" alt="logo" class="logo-menu">
+        <ul>
+          <li><a href="#">Now in cinema</a></li>
+          <li><a href="#">Comming soon</a></li>
+          <li><a href="#" id="store-link">Buy popcorn online</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">About the theater</a></li>
+        </ul>
+      </div>
+      <div id="overlay" class="overlay"></div>
+      <a href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" alt="logo" class="logo-header">
+      </a>
+      <div id="subheader-container">
+        <img src="{% static 'images/logo_imax_white.svg' %}" alt="imax" class="imax-logo">
+        <a href="" id="sign-in">Sign In</a>
+      </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>

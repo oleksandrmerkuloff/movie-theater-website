@@ -10,7 +10,7 @@ from movies.models import Movie
 class HomePageView(ListView):
     model = Movie
     context_object_name = 'movies'
-    template_name = 'index.html'
+    template_name = 'movies/index.html'
 
     def get_queryset(self) -> QuerySet[Any]:
         return Movie.objects.filter(in_theater=True)

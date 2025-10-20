@@ -1,17 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% endblock %}
     <title>{%block title%}Home{% endblock %}</title>
 </head>
 <body>
     {% block content %}
-        {% for movie in movies %}
-            <div class="movie-container">
-                <img src="" alt="">
+    <div class="movie-grid">
+        <div class="movie-card">
+          <img src="https://image.tmdb.org/t/p/w500/5ik4ATKmNtmJU6AYD0bLm56BCVM.jpg" alt="Movie Poster">
+          <div class="movie-info">
+            <div class="movie-title">
+              <a href="#" class="movie-title-link">Dune: Part Two</a>
             </div>
-        {% endfor %}
+          </div>
+        </div>
+        <div class="movie-card">
+      <img src="https://image.tmdb.org/t/p/w500/cvhNj9eoRBe5SxjCbQTkh05UP5K.jpg" alt="Movie Poster">
+      <div class="movie-info">
+        <div class="movie-title">
+          <a href="#" class="movie-title-link">Oppenheimer</a>
+        </div>
+      </div>
+    </div>
     {% endblock %}
 </body>
 </html>
