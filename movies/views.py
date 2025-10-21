@@ -19,7 +19,7 @@ class HomePageView(ListView):
 class DetailMovieView(DetailView):
     model = Movie
     context_object_name = 'movie'
-    template_name = 'movie-page.html'
+    template_name = 'movies/movie-page.html'
 
     def get_object(self) -> Model:
         movie_id = self.kwargs.get('movie_id')

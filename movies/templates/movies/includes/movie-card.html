@@ -1,0 +1,8 @@
+<div class="movie-card">
+  <img src="{{ movie.poster.url }}" alt="Movie Poster">
+  <div class="movie-info">
+    <div class="movie-title">
+      <a href="{% url "movie-detail" movie_id=movie.id %}" class="movie-title-link">{{ movie.name|title }}</a>
+    </div>
+  </div>
+</div>
