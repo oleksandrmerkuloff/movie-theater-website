@@ -20,6 +20,11 @@ body {
     height: calc(100vh - 160px);
 }
 
+.poster-container img {
+    height: 380px;
+    width: auto;
+}
+
 #col2 {
     color: white;
     padding: 30px;

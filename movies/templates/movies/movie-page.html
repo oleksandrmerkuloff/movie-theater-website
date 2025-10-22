@@ -13,7 +13,9 @@
             <div class="poster-container">
                 <img src="{{ movie.poster.url }}" alt="poster">
             </div>
-            <a href="{{ movie.trailer_link }}" target="_blank">Watch trailer</a>
+            {% if movie.trailer_link %}
+                <a href="{{ movie.trailer_link }}" target="_blank">Watch trailer</a>
+            {% endif %}
         </aside>
         <main id="col2">
             <h2>{{ movie.name|upper }}</h2>

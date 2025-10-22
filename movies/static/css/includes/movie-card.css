@@ -16,7 +16,8 @@
   display: block;
 }
 
-.movie-card img:hover {
+.movie-card img:hover,
+.movie-card > .movie-title:not(:hover) {
   filter: blur(3px);
 }
 
