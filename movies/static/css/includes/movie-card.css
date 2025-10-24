@@ -18,7 +18,7 @@
 
 .movie-card img:hover,
 .movie-card > .movie-title:not(:hover) {
-  filter: blur(3px);
+  filter: blur(7px);
 }
 
 .movie-info {

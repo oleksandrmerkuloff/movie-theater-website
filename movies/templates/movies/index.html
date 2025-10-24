@@ -18,6 +18,14 @@
       {% for movie in movies %}
         {% include "movies/includes/movie-card.html" %}
       {% endfor %}
+      <div class="movie-card">
+        <div class="movie-info">
+          <!-- <div class="movie-title">
+            <a href="#all-movie-list" class="movie-title-link">Movie List</a>
+          </div> -->
+          <a href="#all-movie-list" class="link-to-list">To Movie List</a>
+        </div>
+      </div>
     </div>
     {% endblock %}
 </body>

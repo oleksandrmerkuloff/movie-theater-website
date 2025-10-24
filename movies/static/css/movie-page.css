@@ -21,30 +21,74 @@ body {
 }
 
 .poster-container img {
-    height: 380px;
-    width: auto;
+    height: auto;
+    width: 100%;
+}
+
+.trailer-link {
+    display: block;
+    margin-top: 2vh;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(255, 255, 255, .15);
+    border-radius: 6px;
+    font-weight: 700;
+    padding: 5%;
+    text-align: center;
+}
+
+.trailer-link:hover {
+    background-color: red;
 }
 
 #col2 {
     color: white;
     padding: 30px;
+    margin-right: 4vw;
     width: 100%;
     position: relative;
     order: 2;
 }
 
+.info-container {
+    margin-bottom: 5vh;
+}
+
+.info-container h1 {
+    font-size: 2.2em;
+    margin-bottom: 2vh;
+}
+
+.info-container p {
+    font-size: 1.3em;
+}
+
+.genre-link {
+    color: white;
+}
+
+.genre-link:hover {
+    color: red;
+    text-decoration: none;
+}
+
+#col2 #description {
+    font-size: 1.1em;
+}
+
 #col3 {
-    width: 15vw;
-    min-width: 15vw;
+    width: 20vw;
+    min-width: 20vw;
     order: 3;
     box-sizing: border-box;
     position: sticky;
-    right: 0;
+    right: 3vw;
     top: 96px;
     height: calc(100vh - 180px);
     background-color: #2f2b2b;
     border-radius: 8px;
     z-index: 10;
+    border: 1px solid white;
 }
 
 .movie-data {

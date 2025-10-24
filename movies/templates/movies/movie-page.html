@@ -14,40 +14,44 @@
                 <img src="{{ movie.poster.url }}" alt="poster">
             </div>
             {% if movie.trailer_link %}
-                <a href="{{ movie.trailer_link }}" target="_blank">Watch trailer</a>
+                <a href="{{ movie.trailer_link }}" target="_blank" class="trailer-link">Watch Trailer</a>
             {% endif %}
         </aside>
         <main id="col2">
-            <h2>{{ movie.name|upper }}</h2>
-            <p>Age restrictions: {{ movie.age_restrictions }}+</p>
-            <p>Year: <span class="movie-data">{{ movie.year }}</span></p>
-            <p>Original name: <span class="movie-data">{{ movie.original_name }}</span></p>
-            <p>Director: <span class="movie-data">{{ movie.director }}</span></p>
-            <p>Language: <span class="movie-data">{{ movie.language }}</span></p>
-            <p>Genre: 
-                {% for genre in movie.genre.all %}
-                    {{ genre.name }}
-                {% endfor %}
-            </p>
-            <p>Duration: <span class="movie-data">{{ movie.duration }}</span></p>
-            <p>Country: <span class="movie-data">{{ movie.country }}</span></p>
-            <p>Production studio: <span class="movie-data">{{ movie.studio }}</span></p>
-            {% if movie.starring.length > 0 %}
-                <p>Screenplay: 
-                    {% for writer in movie.screenplay.all %}
-                        <span class="movie-data">{{ writer }}</span>
+            <div class="info-container">
+                <h1>{{ movie.name|upper }}</h1>
+                <p>Age restrictions: {{ movie.age_restrictions }}+</p>
+                <p>Year: <span class="movie-data">{{ movie.year }}</span></p>
+                <p>Original name: <span class="movie-data">{{ movie.original_name }}</span></p>
+                <p>Director: <span class="movie-data">{{ movie.director }}</span></p>
+                <p>Language: <span class="movie-data">{{ movie.language }}</span></p>
+                <p>Genre: 
+                    {% for genre in movie.genre.all %}
+                        <a href="" class="genre-link">{{ genre.name }}</a>
                     {% endfor %}
                 </p>
-            {% endif %}
-            {% if movie.starring.length > 0 %}
-            <p>Starring: 
-                {% for star in movie.starring.all %}
-                    <span class="movie-data">{{ star }}</span>
-                {% endfor %}
-            </p>
-            {% endif %}
-            <p>{{ movie.description }}</p>
+                <p>Duration: <span class="movie-data">{{ movie.duration }}</span></p>
+                <p>Country: <span class="movie-data">{{ movie.country }}</span></p>
+                <p>Production studio: <span class="movie-data">{{ movie.studio }}</span></p>
+                {% if movie.starring.length > 0 %}
+                    <p>Screenplay: 
+                        {% for writer in movie.screenplay.all %}
+                            <span class="movie-data">{{ writer }}</span>
+                        {% endfor %}
+                    </p>
+                {% endif %}
+                {% if movie.starring.length > 0 %}
+                <p>Starring: 
+                    {% for star in movie.starring.all %}
+                        <span class="movie-data">{{ star }}</span>
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>
+            <p id="description">{{ movie.description }}</p>
         </main>
-        <aside id="col3"></aside>
+        <aside id="col3">
+            <h1 style="text-align: center; margin-top: 50%; color: white">SHEDULE</h1>
+        </aside>
     </div>
 {% endblock %}

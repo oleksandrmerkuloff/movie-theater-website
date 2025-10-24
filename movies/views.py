@@ -13,7 +13,7 @@ class HomePageView(ListView):
     template_name = 'movies/index.html'
 
     def get_queryset(self) -> QuerySet[Any]:
-        return Movie.objects.filter(in_theater=True)
+        return Movie.objects.filter(in_theater=True)[:4]
 
 
 class DetailMovieView(DetailView):
