@@ -1,0 +1,29 @@
+body {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.title-container {
+    margin-top: 5vh;
+}
+
+.date-and-movie-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    min-height: 80vh;
+    padding: 5vh 3vw 5vh 3vw;
+    border: 1px solid white;
+}
+
+.row {
+    font-size: 1.4rem;
+    position: relative;
+}
+
+.movie-card-cont {
+    width: 60%;
+    background-color: #2A2727;
+    border-radius: 6px;
+    float: right;
+}

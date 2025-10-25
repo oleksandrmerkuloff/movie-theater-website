@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 from movies.models import Movie
 
@@ -26,13 +26,24 @@ class DetailMovieView(DetailView):
         return get_object_or_404(Movie, id=movie_id)
 
 
-class SoonPageView(ListView):
-    model = Movie
-    context_object_name = 'movies'
-    template_name = 'soon-page.html'
+# class SoonPageView(ListView):
+#     model = Movie
+#     context_object_name = 'movies'
+#     template_name = 'soon-page.html'
 
-    def get_queryset(self) -> QuerySet[Any]:
-        return Movie.objects.filter(in_theater=False)
+#     def get_queryset(self) -> QuerySet[Any]:
+#         dates = Movie.objects.values_list('release_at', flat=True)
+#         return Movie.objects.filter(in_theater=False)
+
+
+def soon_page(request):
+    dates = Movie.objects.values_list('release_at', flat=True)
+    movies = Movie.objects.filter(in_theater=False)
+    data = {
+        'dates': sorted(set(dates)),
+        'movies': movies
+    }
+    return render(request, 'movies/soon-page.html', data)
 
 
 class GenreView(ListView):

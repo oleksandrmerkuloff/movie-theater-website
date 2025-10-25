@@ -16,8 +16,8 @@
         <button id="closeBtn">×</button>
         <img src="{% static 'images/logo.png' %}" alt="logo" class="logo-menu">
         <ul>
-          <li><a href="#">Now in cinema</a></li>
-          <li><a href="#">Comming soon</a></li>
+          <li><a href="{% url 'home' %}">Now in cinema</a></li>
+          <li><a href="{% url 'coming-soon' %}">Comming soon</a></li>
           <li><a href="#" id="store-link">Buy popcorn online</a></li>
           <li><a href="#">News</a></li>
           <li><a href="#">About the theater</a></li>

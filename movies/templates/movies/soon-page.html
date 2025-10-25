@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/soon.css' %}">
+{% endblock %}
+{% block title %}Coming soon{% endblock %}
+
+{% block content %}
+    <div class="title-container">
+        <h1 style="font-size: 1.8em; margin-bottom: 3vh; text-align: center;">Coming soon to cinema</h1>
+        <p style="font-size: 1.2em; text-align: center;">Unconfirmed release schedule</p>
+    </div>
+    <div class="date-and-movie-container">
+        <div class="row">
+            {% for date in dates %}
+                <p>{{ date|date:"d F" }}</p>
+                <div class="movie-card-cont">
+                    <div class="movie-card"></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
