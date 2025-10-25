@@ -1,0 +1,16 @@
+.movie-card {
+    width: 18%;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.card-link:hover {
+    color: red;
+}
+
+.card-poster {
+    border-radius: 6px;
+}

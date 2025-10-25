@@ -13,17 +13,17 @@ body {
     gap: 1vh;
     min-height: 80vh;
     padding: 5vh 3vw 5vh 3vw;
-    border: 1px solid white;
 }
 
 .row {
     font-size: 1.4rem;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 .movie-card-cont {
-    width: 60%;
+    width: 80%;
     background-color: #2A2727;
     border-radius: 6px;
-    float: right;
+    padding: 2%;
 }

@@ -3,6 +3,7 @@
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/soon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/includes/soon-card.css' %}">
 {% endblock %}
 {% block title %}Coming soon{% endblock %}
 
@@ -12,13 +13,17 @@
         <p style="font-size: 1.2em; text-align: center;">Unconfirmed release schedule</p>
     </div>
     <div class="date-and-movie-container">
-        <div class="row">
-            {% for date in dates %}
-                <p>{{ date|date:"d F" }}</p>
-                <div class="movie-card-cont">
-                    <div class="movie-card"></div>
+        {% for date in dates %}
+            <div class="row">
+                    <p>{{ date|date:"d F" }}</p>
+                    <div class="movie-card-cont">
+                        {% for movie in movies %}
+                            {% if movie.release_at == date %}
+                                {% include 'movies/includes/soon-card.html' %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
-        </div>
     </div>
 {% endblock %}
