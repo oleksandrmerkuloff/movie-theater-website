@@ -27,7 +27,7 @@
                 <p>Language: <span class="movie-data">{{ movie.language }}</span></p>
                 <p>Genre: 
                     {% for genre in movie.genre.all %}
-                        <a href="" class="genre-link">{{ genre.name }}</a>
+                        <a href="{% url 'movies-by-genre' genre_name=genre.name %}" class="genre-link">{{ genre.name }}</a>
                     {% endfor %}
                 </p>
                 <p>Duration: <span class="movie-data">{{ movie.duration }}</span></p>

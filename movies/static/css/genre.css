@@ -1,0 +1,31 @@
+body {
+    background-color: #2D2D2D;
+}
+
+.genre-background {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    min-height: 40vh;
+    background: linear-gradient(black, red);
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-background h2 {
+    font-size: 1.6em;
+}
+
+.genre-background h1 {
+    font-size: 4em;
+}
+
+.movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80vh;
+    min-height: 80vh;
+    padding: 3%;
+    gap: 3vw;
+}

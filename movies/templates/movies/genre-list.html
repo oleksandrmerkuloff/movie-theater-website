@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/genre.css' %}">
+    <link rel="stylesheet" href="{% static 'css/includes/genre-card.css' %}">
+{% endblock %}
+
+{% block title %}{{ genre_name }}{% endblock %}
+
+{% block content %}
+    <div class="genre-background">
+        <h2>Movies in the MULTIBUGS network in the genre</h2>
+        <h1>{{ genre_name }}</h1>
+    </div>
+    <div class="movies-container">
+        {% for movie in movies %}
+            {% include 'movies/includes/genre-card.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}

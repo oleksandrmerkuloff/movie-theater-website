@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-from movies.views import HomePageView, DetailMovieView, soon_page, GenreView
+from movies.views import HomePageView, DetailMovieView, soon_page, genre_view
 
 
 urlpatterns = [
@@ -14,7 +14,7 @@ urlpatterns = [
     path('coming-soon/', soon_page, name='coming-soon'),
     path(
         'genre/<str:genre_name>/',
-        GenreView.as_view(),
+        genre_view,
         name='movies-by-genre'
         )
 ]

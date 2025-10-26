@@ -46,11 +46,18 @@ def soon_page(request):
     return render(request, 'movies/soon-page.html', data)
 
 
-class GenreView(ListView):
-    model = Movie
-    context_object_name = 'movies'
-    template_name = 'genre-list.html'
+def genre_view(request, genre_name):
+    movies = Movie.objects.filter(genre__name__iexact=genre_name).distinct()
+    data = {'movies': movies, 'genre_name': genre_name}
+    return render(request, 'movies/genre-list.html', data)
 
-    def get_queryset(self) -> QuerySet[Any]:
-        genre_name = self.kwargs.get('genre_name')
-        return Movie.objects.filter(genres__name__iexact=genre_name).distinct()
+# class GenreView(ListView):
+#     model = Movie
+#     context_object_name = 'movies'
+#     template_name = 'movies/genre-list.html'
+
+#     def get_queryset(self) -> dict[str, Any]:
+#         genre_name = self.kwargs.get('genre_name')
+#         print(genre_name)
+#         movies = Movie.objects.filter(genre__name__iexact=genre_name).distinct()
+#         return {'movies': movies, 'genre_name': genre_name}

@@ -1,0 +1,18 @@
+.genre-card {
+    width: 20%;
+}
+
+.genre-card a {
+    color: white;
+    font-size: 1.4em;
+    text-decoration: none;
+}
+
+.genre-card img {
+    width: 100%;
+    height: auto;
+}
+
+.genre-card a:hover {
+    color: red;
+}
