@@ -14,9 +14,11 @@
       <button id="menuBtn">☰</button>
       <div id="sideMenu" class="side-menu">
         <button id="closeBtn">×</button>
-        <img src="{% static 'images/logo.png' %}" alt="logo" class="logo-menu">
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.png' %}" alt="logo" class="logo-menu">
+        </a>
         <ul>
-          <li><a href="{% url 'home' %}">Now in cinema</a></li>
+          <li><a href="{% url 'now-in-cinema' %}">Now in cinema</a></li>
           <li><a href="{% url 'coming-soon' %}">Comming soon</a></li>
           <li><a href="#" id="store-link">Buy popcorn online</a></li>
           <li><a href="#">News</a></li>

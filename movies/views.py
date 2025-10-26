@@ -26,14 +26,13 @@ class DetailMovieView(DetailView):
         return get_object_or_404(Movie, id=movie_id)
 
 
-# class SoonPageView(ListView):
-#     model = Movie
-#     context_object_name = 'movies'
-#     template_name = 'soon-page.html'
+class MoviesListView(ListView):
+    model = Movie
+    context_object_name = 'movies'
+    template_name = 'movies/movies-list.html'
 
-#     def get_queryset(self) -> QuerySet[Any]:
-#         dates = Movie.objects.values_list('release_at', flat=True)
-#         return Movie.objects.filter(in_theater=False)
+    def get_queryset(self) -> QuerySet[Any]:
+        return Movie.objects.filter(in_theater=True)
 
 
 def soon_page(request):

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/movies-list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/includes/genre-card.css' %}">
+{% endblock %}
+
+{% block title %}Now in the cinema{% endblock %}
+
+{% block content %}
+    <div class="movies-container">
+        {% for movie in movies %}
+            {% include 'movies/includes/genre-card.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}
