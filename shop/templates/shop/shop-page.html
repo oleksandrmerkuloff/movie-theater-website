@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/shop.css' %}">
+{% endblock %}
+
+{% block title %}Online Store{% endblock %}
+
+{% block content %}
+    <div class="store-container">
+        <div class="products-section">
+            <h2 class="section-title">🎬 Snacks & Drinks</h2>
+            <div class="products-grid">
+                {% for product in products %}
+                <div class="product-card" data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        <div class="quantity-controls">
+                            <button class="minus">−</button>
+                            <span class="quantity">0</span>
+                            <button class="plus">+</button>
+                        </div>
+                        <p class="price">₴{{ product.price }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="cart-section">
+            <h2 class="section-title">🛒 Your Cart</h2>
+            <div id="cart-items"></div>
+            <hr>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">₴0.00</span>
+            </div>
+            <button id="confirm-cart" class="confirm-btn">Confirm Order</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/shopUpdate.js' %}"></script>
+{% endblock %}
