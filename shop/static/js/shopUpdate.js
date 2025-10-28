@@ -53,17 +53,20 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Cart confirmed:", cart);
 
         // Send to Django backend
-        fetch("/create-cart/", {
+        fetch(CREATE_CART_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": getCookie("csrftoken"),
             },
-            body: JSON.stringify(cart),
+            body: JSON.stringify({"items": cart, 'total': cartTotal.textContent}),
         })
         .then(res => res.json())
         .then(data => {
-            alert("Order confirmed!");
+            if (data.redirect_url) {
+                window.location.href = HOME;
+            }
+            // alert("Order confirmed!");
             console.log(data);
         });
     });

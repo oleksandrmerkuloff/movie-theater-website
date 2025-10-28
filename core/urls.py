@@ -24,7 +24,6 @@ urlpatterns = [
     path('', include('movies.urls')),
     path('user/<uuid:pk>/', include('accounts.urls')),
     path('shop/', include('shop.urls')),
-    path('cart/', include('cart.urls'))
 ]
 
 if settings.DEBUG:
