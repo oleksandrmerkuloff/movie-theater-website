@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(res => res.json())
         .then(data => {
             if (data.redirect_url) {
-                window.location.href = HOME;
+                window.location.href = data.redirect_url;
             }
             // alert("Order confirmed!");
             console.log(data);
