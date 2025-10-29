@@ -68,7 +68,8 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'templates',
             BASE_DIR / 'movies/templates/',
-            BASE_DIR / 'store/templates/'
+            BASE_DIR / 'store/templates/',
+            BASE_DIR / 'accounts/templates/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -137,7 +138,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'movies/static',
-    BASE_DIR / 'shop/static'
+    BASE_DIR / 'shop/static',
+    BASE_DIR / 'accounts/static',
     ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 

@@ -221,3 +221,28 @@ class Movie(models.Model):
         verbose_name = 'Movie'
         verbose_name_plural = 'Movies'
         ordering = ('-release_at', 'name', 'in_theater')
+
+
+class Session(models.Model):
+    id = models.UUIDField(editable=False, primary_key=True, default=uuid.uuid4)
+    start_at = models.DateTimeField()
+    ended_at = models.DateTimeField()
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE,
+        related_name='sessions'
+    )
+    status = models.CharField(
+        max_length=40,
+        choices=[
+            ('plan', 'planned'),
+            ('go', 'going'),
+            ('end', 'ended')
+        ]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Session'
+        verbose_name_plural = 'Sessions'
+        ordering = ['-created_at']
