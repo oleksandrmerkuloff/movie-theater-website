@@ -30,7 +30,7 @@
       </a>
       <div id="subheader-container">
         <img src="{% static 'images/logo_imax_white.svg' %}" alt="imax" class="imax-logo">
-        <a href="" id="sign-in">Sign In</a>
+        <a href="{% url 'test-profile' user.id %}" id="sign-in">Sign In</a>
       </div>
     </header>
     {% block content %}
