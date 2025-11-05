@@ -30,7 +30,11 @@
       </a>
       <div id="subheader-container">
         <img src="{% static 'images/logo_imax_white.svg' %}" alt="imax" class="imax-logo">
-        <a href="{% url 'test-profile' user.id %}" id="sign-in">Sign In</a>
+        {% if user.is_authenticated %}
+          <a href=""></a>
+        {% else %}
+          <a href="{% url 'test-profile' user.id %}" id="sign-in">Sign In</a>
+        {% endif %}
       </div>
     </header>
     {% block content %}

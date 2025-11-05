@@ -4,5 +4,5 @@ from accounts.views import test_profile_view
 
 
 urlpatterns = [
-    path('', test_profile_view, name='test-profile')
+    path('<uuid:pk>/', test_profile_view, name='test-profile')
 ]

@@ -2,115 +2,111 @@
 {% load static %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/account.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
-{% block title %}My Account{% endblock %}
+{% block title %}My Profile{% endblock %}
 
 {% block content %}
 <div class="profile-container">
-
-    <div class="tabs">
-        <button class="tab active" data-tab="info">👤 Profile Info</button>
-        <button class="tab" data-tab="orders">🧾 My Orders</button>
+    <div class="profile-tabs">
+        <button class="tab-button active" data-tab="info">👤 Profile Info</button>
+        <button class="tab-button" data-tab="orders">📦 My Orders</button>
     </div>
 
-    <div class="tab-content active" id="info">
-        <h2>Personal Information</h2>
-
-        <form method="post" action="{% url 'update_profile' %}" class="profile-form">
+    <!-- Profile Info Section -->
+    <div id="info" class="tab-content active">
+        <form id="profile-form" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label>First Name</label>
-                <input type="text" name="first_name" value="{{ user.first_name }}">
+                <input type="text" name="first_name" value="{{ user.first_name }}" required>
             </div>
-
             <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" name="last_name" value="{{ user.last_name }}">
+                <input type="text" name="last_name" value="{{ user.last_name }}" required>
             </div>
-
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" value="{{ user.email }}">
+                <input type="email" name="email" value="{{ user.email }}" required>
             </div>
-
             <div class="form-group">
                 <label>Phone</label>
-                <input type="text" name="phone" value="{{ user.profile.phone }}">
+                <input type="tel" name="phone" value="{{ profile.phone }}">
             </div>
-
             <div class="form-group">
                 <label>Sex</label>
                 <select name="sex">
-                    <option value="m" {% if user.profile.sex == 'm' %}selected{% endif %}>Male</option>
-                    <option value="f" {% if user.profile.sex == 'f' %}selected{% endif %}>Female</option>
-                    <option value="o" {% if user.profile.sex == 'o' %}selected{% endif %}>Other</option>
+                    <option value="m" {% if profile.sex == 'm' %}selected{% endif %}>Male</option>
+                    <option value="f" {% if profile.sex == 'f' %}selected{% endif %}>Female</option>
+                    <option value="o" {% if profile.sex == 'o' %}selected{% endif %}>Other</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label>Birthday</label>
-                <input type="date" name="birthday" value="{{ user.profile.birthday|date:'Y-m-d' }}">
+                <input type="date" name="birthday" value="{{ profile.birthday|date:'Y-m-d' }}">
             </div>
-
             <div class="form-group">
                 <label>Client Type</label>
                 <select name="client_type">
-                    <option value="cli" {% if user.profile.client_type == 'cli' %}selected{% endif %}>Client</option>
-                    <option value="emp" {% if user.profile.client_type == 'emp' %}selected{% endif %}>Employee</option>
-                    <option value="pen" {% if user.profile.client_type == 'pen' %}selected{% endif %}>Pensioner</option>
-                    <option value="nd" {% if user.profile.client_type == 'nd' %}selected{% endif %}>Not Defined</option>
-                    <option value="sk" {% if user.profile.client_type == 'sk' %}selected{% endif %}>Schoolkid</option>
-                    <option value="st" {% if user.profile.client_type == 'st' %}selected{% endif %}>Student</option>
+                    <option value="cli" {% if profile.client_type == 'cli' %}selected{% endif %}>Client</option>
+                    <option value="emp" {% if profile.client_type == 'emp' %}selected{% endif %}>Employee</option>
+                    <option value="pen" {% if profile.client_type == 'pen' %}selected{% endif %}>Pensioner</option>
+                    <option value="nd" {% if profile.client_type == 'nd' %}selected{% endif %}>Not Defined</option>
+                    <option value="sk" {% if profile.client_type == 'sk' %}selected{% endif %}>Schoolkid</option>
+                    <option value="st" {% if profile.client_type == 'st' %}selected{% endif %}>Student</option>
                 </select>
             </div>
 
-            <div class="button-group">
-                <button type="submit" class="save-btn">💾 Save Changes</button>
-                <a href="{% url 'logout' %}" class="exit-btn">🚪 Exit</a>
+            <div class="form-actions">
+                <button type="submit" class="save-btn">💾 Save</button>
+                <button type="button" class="cancel-btn" onclick="window.location.href='/'">❌ Exit</button>
             </div>
         </form>
     </div>
 
-    <div class="tab-content" id="orders">
-        <h2>My Orders</h2>
+    <!-- Orders Section -->
+    <div id="orders" class="tab-content">
         {% if orders %}
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                    <tr>
-                        <td>#{{ order.id|slice:":8" }}</td>
-                        <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
-                        <td>{{ order.get_status_display }}</td>
-                        <td>₴{{ order.total_text }}</td>
-                    </tr>
+        <div class="orders-list">
+            {% for order in orders %}
+            <div class="order-card">
+                <div class="order-header">
+                    <span>🧾 Order #{{ order.id }}</span>
+                    <span>{{ order.date|date:"d M Y H:i" }}</span>
+                </div>
+                <div class="order-items">
+                    {% for item in order.items.all %}
+                    <div class="order-item">
+                        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                        <span>₴{{ item.total_price }}</span>
+                    </div>
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+                <div class="order-footer">
+                    <strong>Total:</strong> ₴{{ order.total }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
         {% else %}
-            <p>You haven’t made any orders yet.</p>
+        <p>No orders yet.</p>
         {% endif %}
     </div>
-
 </div>
 
 <script>
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabs = document.querySelectorAll('.tab-content');
 
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabs.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+        });
     });
 });
 </script>
