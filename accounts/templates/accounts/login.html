@@ -2,116 +2,52 @@
 {% load static %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/account.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock %}
 
-{% block title %}My Account{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="profile-container">
+<div class="login-container">
+    <div class="login-card">
 
-    <div class="tabs">
-        <button class="tab active" data-tab="info">👤 Profile Info</button>
-        <button class="tab" data-tab="orders">🧾 My Orders</button>
-    </div>
+        <h2 class="login-title">Welcome Back</h2>
+        <p class="login-sub">Please sign in to your account</p>
 
-    <div class="tab-content active" id="info">
-        <h2>Personal Information</h2>
+        {% if form.errors %}
+        <div class="login-error">
+            Incorrect username or password.
+        </div>
+        {% endif %}
 
-        <form method="post" action="{% url 'update_profile' %}" class="profile-form">
+        <form method="POST" class="login-form">
             {% csrf_token %}
+
             <div class="form-group">
-                <label>First Name</label>
-                <input type="text" name="first_name" value="{{ user.first_name }}">
+                <label>Phone number</label>
+                <input type="text" name="phone" required autofocus>
             </div>
 
             <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" name="last_name" value="{{ user.last_name }}">
+                <label>Password</label>
+                <input type="password" name="password" required>
             </div>
 
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value="{{ user.email }}">
+            <div class="form-extra">
+                <label class="remember-me">
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
+
+                <a href="" class="forgot-link">Forgot password?</a>
             </div>
 
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="text" name="phone" value="{{ user.profile.phone }}">
-            </div>
+            <button type="submit" class="login-btn">Sign In</button>
 
-            <div class="form-group">
-                <label>Sex</label>
-                <select name="sex">
-                    <option value="m" {% if user.profile.sex == 'm' %}selected{% endif %}>Male</option>
-                    <option value="f" {% if user.profile.sex == 'f' %}selected{% endif %}>Female</option>
-                    <option value="o" {% if user.profile.sex == 'o' %}selected{% endif %}>Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Birthday</label>
-                <input type="date" name="birthday" value="{{ user.profile.birthday|date:'Y-m-d' }}">
-            </div>
-
-            <div class="form-group">
-                <label>Client Type</label>
-                <select name="client_type">
-                    <option value="cli" {% if user.profile.client_type == 'cli' %}selected{% endif %}>Client</option>
-                    <option value="emp" {% if user.profile.client_type == 'emp' %}selected{% endif %}>Employee</option>
-                    <option value="pen" {% if user.profile.client_type == 'pen' %}selected{% endif %}>Pensioner</option>
-                    <option value="nd" {% if user.profile.client_type == 'nd' %}selected{% endif %}>Not Defined</option>
-                    <option value="sk" {% if user.profile.client_type == 'sk' %}selected{% endif %}>Schoolkid</option>
-                    <option value="st" {% if user.profile.client_type == 'st' %}selected{% endif %}>Student</option>
-                </select>
-            </div>
-
-            <div class="button-group">
-                <button type="submit" class="save-btn">💾 Save Changes</button>
-                <a href="{% url 'logout' %}" class="exit-btn">🚪 Exit</a>
+            <div class="signup-text">
+                Don't have an account? <a href="{% url 'register' %}">Sign up</a>
             </div>
         </form>
-    </div>
 
-    <div class="tab-content" id="orders">
-        <h2>My Orders</h2>
-        {% if orders %}
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                    <tr>
-                        <td>#{{ order.id|slice:":8" }}</td>
-                        <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
-                        <td>{{ order.get_status_display }}</td>
-                        <td>₴{{ order.total_text }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>You haven’t made any orders yet.</p>
-        {% endif %}
     </div>
-
 </div>
-
-<script>
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
-    });
-});
-</script>
 {% endblock %}

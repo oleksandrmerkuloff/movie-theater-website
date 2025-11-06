@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <div class="register-card">
+
+        <h2 class="register-title">Create Account</h2>
+        <p class="register-sub">Join us and get started</p>
+
+        {% if errors %}
+        <div class="register-error">
+            {{ errors }}
+        </div>
+        {% endif %}
+
+        <form method="POST" class="register-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Phone number</label>
+                <input type="text" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>First name</label>
+                <input type="text" name="fname" required>
+                <label>Last name</label>
+                <input type="text" name="lname" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password1" required>
+            </div>
+
+            <div class="form-group">
+                <label>Repeat Password</label>
+                <input type="password" name="password2" required>
+            </div>
+
+            <button type="submit" class="register-btn">Create Account</button>
+
+            <div class="login-text">
+                Already have an account? <a href="{% url 'login' %}">Log in</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
