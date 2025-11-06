@@ -50,13 +50,6 @@ def genre_view(request, genre_name):
     data = {'movies': movies, 'genre_name': genre_name}
     return render(request, 'movies/genre-list.html', data)
 
-# class GenreView(ListView):
-#     model = Movie
-#     context_object_name = 'movies'
-#     template_name = 'movies/genre-list.html'
 
-#     def get_queryset(self) -> dict[str, Any]:
-#         genre_name = self.kwargs.get('genre_name')
-#         print(genre_name)
-#         movies = Movie.objects.filter(genre__name__iexact=genre_name).distinct()
-#         return {'movies': movies, 'genre_name': genre_name}
+def about_view(request):
+    return render(request, 'movies/about.html')

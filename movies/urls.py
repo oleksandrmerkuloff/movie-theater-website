@@ -3,7 +3,7 @@ from django.urls import path
 
 from movies.views import (
     HomePageView, DetailMovieView, MoviesListView,
-    soon_page, genre_view
+    soon_page, genre_view, about_view
     )
 
 
@@ -20,5 +20,6 @@ urlpatterns = [
         'genre/<str:genre_name>/',
         genre_view,
         name='movies-by-genre'
-        )
+        ),
+    path('about-us/', about_view, name='about')
 ]

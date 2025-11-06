@@ -11,6 +11,8 @@ from orders.models import Order, OrderItem
 
 def shop_view(request: HttpRequest):
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'redirect_url': reverse('login')})
         data = json.loads(request.body.decode('utf-8'))
         order_items = data.get('items', [])
         total = data.get('total', 0)

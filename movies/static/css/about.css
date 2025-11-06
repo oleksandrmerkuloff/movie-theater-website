@@ -1,0 +1,115 @@
+.about-page {
+    margin: 0;
+    padding: 0;
+    color: #e0e0e0;
+    line-height: 1.8;
+}
+
+.about-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    background: url('../images/cinema-hall.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    margin-bottom: 1rem;
+}
+
+.hero-content .lead {
+    font-size: 1.5rem;
+    color: #ffd700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.about-content {
+    padding: 80px 20px;
+    background: #111;
+}
+
+.about-content .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #1a1a1a;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.about-content h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: #ffd700;
+    margin-bottom: 2rem;
+}
+
+.about-content p {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.highlight {
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+    margin: 2.5rem 0;
+}
+
+.final-words {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 3rem 0;
+    font-weight: 600;
+}
+
+.final-words p {
+    margin: 0.5rem 0;
+}
+
+.btn-cinema {
+    background: #c41e3a;
+    color: #fff;
+    padding: 16px 48px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-cinema:hover {
+    background: #e50914;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(229, 9, 20, 0.5);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 3rem; }
+    .hero-content .lead { font-size: 1.2rem; }
+    .about-content .container { padding: 30px 20px; }
+    .about-content h2 { font-size: 2rem; }
+}

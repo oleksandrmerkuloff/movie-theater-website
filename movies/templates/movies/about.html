@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Про нас - MultiBugs{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="about-page">
+
+    <section class="about-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>MultiBugs</h1>
+            <p class="lead">Your favorite movie theater since 2024</p>
+        </div>
+    </section>
+
+    <section class="about-content">
+        <div class="container">
+            <h2>Welcome to MultiBugs!</h2>
+            
+            <p>
+                MultiBugs opened its doors in 2024 with a simple but ambitious goal of — make every trip to the cinema an unforgettable holiday.
+            </p>
+            
+            <p>
+                We — is a place where friends laugh to tears, families create shared memories, 
+                and couples in love hold hands under the light of the big screen.
+            </p>
+
+            <p>
+                Each row, each chair — is carefully thought out for your comfort. 
+                The powerful Dolby Atmos sound immerses you in the center of events, 
+                and a crystal clear 4K image makes every frame live.
+            </p>
+
+            <p>
+                From loud blockbusters to cozy cartoons for children, 
+                from nostalgic classics to premieres — we have a movie for everyone.
+            </p>
+
+            <p class="highlight">
+                Our team is always ready to help choose the best places 
+                recommend delicious snacks and just give a smile.
+            </p>
+
+            <div class="final-words">
+                <p>Thank you for choosing MultiBugs.</p>
+                <p>See you at the cinema!</p>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{% url 'home' %}" class="btn-cinema">View movies</a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
