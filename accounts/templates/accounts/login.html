@@ -22,23 +22,24 @@
 
         <form method="POST" class="login-form">
             {% csrf_token %}
+            {{ form.non_field_errors }}
 
             <div class="form-group">
-                <label>Phone number</label>
-                <input type="text" name="phone" required autofocus>
+                <label>{{ form.phone.label }}</label>
+                {{ form.phone }}
             </div>
 
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
+                <label>{{ form.password.label }}</label>
+                {{ form.password }}
             </div>
 
             <div class="form-extra">
                 <label class="remember-me">
-                    <input type="checkbox" name="remember"> Remember me
+                    {{ form.remember }} {{ form.remember.label }}
                 </label>
 
-                <a href="" class="forgot-link">Forgot password?</a>
+                <a href="{% url 'reset' %}" class="forgot-link">Forgot password?</a>
             </div>
 
             <button type="submit" class="login-btn">Sign In</button>
