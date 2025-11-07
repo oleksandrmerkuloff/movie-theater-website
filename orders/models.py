@@ -26,6 +26,9 @@ class Order(models.Model):
     def __str__(self) -> str:
         return f'{self.user} with {self.total_text}'
 
+    class Meta:
+        ordering = ['-created_at']
+
 
 class OrderItem(models.Model):
     name = models.CharField(max_length=75)

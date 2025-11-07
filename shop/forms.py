@@ -16,7 +16,7 @@ class PaymentForm(forms.Form):
             attrs={'placeholder': 'you@example.com'}
         )
     )
-    card_numeber = forms.CharField(
+    card_number = forms.CharField(
         max_length=30,
         label='Card number'
     )
@@ -33,7 +33,6 @@ class PaymentForm(forms.Form):
     )
     order_type = forms.ChoiceField(
         label='Delivery Option',
-        initial='Choose order type',
         choices=[
             ('Food', 'Food'),
             ('Tickets', 'Tickets')

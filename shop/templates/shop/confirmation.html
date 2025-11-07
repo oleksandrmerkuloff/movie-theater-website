@@ -15,31 +15,33 @@
         <form id="payment-form" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="name">Full Name</label>
-                <input id="name" name="name" type="text" placeholder="John Doe" required>
+                <label>{{ form.name.label }}</label>
+                {{ form.name }}
             </div>
 
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input id="email" name="email" type="email" placeholder="you@example.com" required>
+                <label>{{ form.email.label }}</label>
+                {{ form.email }}
             </div>
 
             <div class="form-group">
-                <label for="payment">Payment Method</label>
-                <select id="payment" name="payment" required>
-                    <option value="">Select a method</option>
-                    <option value="card">💳 Credit/Debit Card</option>
-                    <option value="paypal">🪙 PayPal</option>
-                </select>
+                <label>{{ form.card_number.label }}</label>
+                {{ form.card_number }}
             </div>
 
             <div class="form-group">
-                <label for="delivery">Delivery Option</label>
-                <select id="delivery" name="delivery" required>
-                    <option value="">Choose delivery type</option>
-                    <option value="pickup">🏪 Pickup at cinema</option>
-                    <option value="ticket">🎟️ Movie Ticket</option>
-                </select>
+                <label>{{ form.expiration_at.label }}</label>
+                {{ form.expiration_at }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.cvv_code.label }}</label>
+                {{ form.cvv_code }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.order_type.label }}</label>
+                {{ form.order_type }}
             </div>
 
             <button type="submit" class="confirm-btn">Confirm & Pay</button>
