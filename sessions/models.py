@@ -1,52 +1,67 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
+from decimal import Decimal
+from datetime import datetime
+
 from movies.models import Movie
-from django.utils import timezone
+
 
 class Hall(models.Model):
     name = models.CharField(max_length=50)
-    rows = models.PositiveIntegerField(default=10)
-    seats_per_row = models.PositiveIntegerField(default=12)
+    rows = models.IntegerField(default=10)
+    seats_per_row = models.IntegerField(default=10)
 
     def __str__(self):
-        return f"Hall {self.name} ({self.rows}×{self.seats_per_row})"
+        return self.name
+
+
+class Session(models.Model):
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE,
+        related_name='sessions'
+        )
+    hall = models.ForeignKey(
+        Hall,
+        on_delete=models.CASCADE
+        )
+    start_time = models.DateTimeField()
+    price_standard = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        default=Decimal(150.00)
+        )
+    price_premium = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        default=Decimal(250.00)
+        )
+
+    class Meta:
+        unique_together = ('hall', 'start_time')
+
+    def __str__(self):
+        return f"{self.movie.name} - {self.start_time.strftime('%Y-%m-%d %H:%M')}"
+
+    def clean(self):
+        if self.start_time < datetime.now():
+            raise ValidationError("Cannot create session in the past.")
 
 
 class Seat(models.Model):
-    hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name="seats")
-    row = models.PositiveIntegerField()
-    number = models.PositiveIntegerField()
+    session = models.ForeignKey(
+        Session,
+        on_delete=models.CASCADE,
+        related_name='seats'
+        )
+    row = models.IntegerField()
+    seat = models.IntegerField()
+    is_booked = models.BooleanField(default=False)
+    is_premium = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ('hall', 'row', 'number')
-        ordering = ['row', 'number']
+        unique_together = ('session', 'row', 'seat')
 
     def __str__(self):
-        return f"Row {self.row}, Seat {self.number}"
-
-
-class MovieSession(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='sessions')
-    hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='sessions')
-    start_time = models.DateTimeField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.movie.name} in {self.hall.name} at {self.start_time.strftime('%Y-%m-%d %H:%M')}"
-
-
-class SessionSeat(models.Model):
-    STATUS_CHOICES = [
-        ('free', 'Free'),
-        ('reserved', 'Reserved'),
-        ('sold', 'Sold'),
-    ]
-
-    session = models.ForeignKey(MovieSession, on_delete=models.CASCADE, related_name="session_seats")
-    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='free')
-
-    class Meta:
-        unique_together = ('session', 'seat')
-
-    def __str__(self):
-        return f"{self.session} - {self.seat} ({self.status})"
+        return f"R{self.row}-S{self.seat} ({'Premium' if self.is_premium else 'Standard'})"

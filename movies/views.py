@@ -36,7 +36,9 @@ class MoviesListView(ListView):
 
 
 def soon_page(request):
-    dates = Movie.objects.filter(in_theater=False).values_list('release_at', flat=True)
+    dates = Movie.objects.filter(in_theater=False).values_list(
+        'release_at', flat=True
+        )
     movies = Movie.objects.filter(in_theater=False)
     data = {
         'dates': sorted(set(dates)),
