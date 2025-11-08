@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'movies.apps.MoviesConfig',
     'shop.apps.ShopConfig',
     'orders.apps.OrdersConfig',
-    'sessions.apps.SessionsConfig'
+    'movie_schedule.apps.MovieScheduleConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +71,7 @@ TEMPLATES = [
             BASE_DIR / 'movies/templates/',
             BASE_DIR / 'store/templates/',
             BASE_DIR / 'accounts/templates/',
-            BASE_DIR / 'sessions/templates',
+            BASE_DIR / 'movie_schedule/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -142,7 +142,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'movies/static',
     BASE_DIR / 'shop/static',
     BASE_DIR / 'accounts/static',
-    BASE_DIR / 'sessions/static',
+    BASE_DIR / 'movie_schedule/static'
     ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 

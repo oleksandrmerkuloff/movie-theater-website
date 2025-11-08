@@ -1,8 +1,8 @@
 from typing import Any
-from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
+from django.utils import timezone
 
 from movies.models import Movie
 
@@ -20,10 +20,17 @@ class DetailMovieView(DetailView):
     model = Movie
     context_object_name = 'movie'
     template_name = 'movies/movie-page.html'
+    pk_url_kwarg = 'movie_id'  # ← tells Django to use movie_id from URL
 
-    def get_object(self) -> Model:
-        movie_id = self.kwargs.get('movie_id')
-        return get_object_or_404(Movie, id=movie_id)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        today = timezone.now().date()
+        context['sessions_today'] = self.object.sessions.filter(
+            start_time__date=today
+        ).order_by('start_time')
+
+        return context
 
 
 class MoviesListView(ListView):

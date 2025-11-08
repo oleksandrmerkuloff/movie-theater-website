@@ -1,8 +1,8 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 from decimal import Decimal
-from datetime import datetime
 
 from movies.models import Movie
 
@@ -20,12 +20,9 @@ class Session(models.Model):
     movie = models.ForeignKey(
         Movie,
         on_delete=models.CASCADE,
-        related_name='sessions'
+        related_name='movie_sessions'
         )
-    hall = models.ForeignKey(
-        Hall,
-        on_delete=models.CASCADE
-        )
+    hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     price_standard = models.DecimalField(
         max_digits=6,
@@ -42,10 +39,12 @@ class Session(models.Model):
         unique_together = ('hall', 'start_time')
 
     def __str__(self):
-        return f"{self.movie.name} - {self.start_time.strftime('%Y-%m-%d %H:%M')}"
+        return f"{self.movie.name} - {
+            self.start_time.strftime('%Y-%m-%d %H:%M')
+            }"
 
     def clean(self):
-        if self.start_time < datetime.now():
+        if self.start_time < timezone.now():
             raise ValidationError("Cannot create session in the past.")
 
 
