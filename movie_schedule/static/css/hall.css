@@ -1,0 +1,326 @@
+.hall-page {
+    display: flex;
+    gap: 2.5rem;
+    padding: 2rem;
+    min-height: 100vh;
+    background: #0f0f0f;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eee;
+}
+
+.hall-section {
+    flex: 7;
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+.hall-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.hall-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #ffd700;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.hall-header p {
+    margin: 0.4rem 0 0;
+    color: #aaa;
+    font-size: 1rem;
+}
+
+.screen {
+    background: linear-gradient(135deg, #2c3e50, #1a252f);
+    color: #ccc;
+    text-align: center;
+    padding: 1.2rem;
+    margin: 2rem auto;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    width: 80%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+.screen::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.3));
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.seats-grid {
+    display: grid;
+    gap: 12px;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.seat-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.seat {
+    width: 48px;
+    height: 48px;
+    background: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    user-select: none;
+}
+
+.seat:hover:not(.booked):not(.selected) {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.5);
+    z-index: 10;
+}
+
+.seat.booked {
+    background: #e74c3c;
+    cursor: not-allowed;
+    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
+    position: relative;
+}
+
+.seat.booked::after {
+    content: 'X';
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.seat.selected {
+    background: #f39c12;
+    transform: scale(1.12);
+    box-shadow: 0 8px 20px rgba(241, 196, 15, 0.6);
+    z-index: 10;
+    animation: pulse 0.6s ease;
+}
+
+.seat.premium {
+    background: #9b59b6;
+}
+
+.seat.premium:hover:not(.booked):not(.selected) {
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.12); }
+}
+
+/* LEGEND */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    margin-top: 2.5rem;
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend .seat {
+    width: 22px;
+    height: 22px;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+}
+
+.legend .seat:hover {
+    transform: none;
+}
+
+.cart-section {
+    flex: 3;
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #333;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-section h3 {
+    margin: 0 0 1.5rem;
+    color: #ffd700;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 45vh;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #333;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.cart-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin: 0 -0.5rem;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.seat-label {
+    font-weight: 600;
+    color: #fff;
+}
+
+.seat-price {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.cart-total {
+    text-align: center;
+    font-size: 1.4rem;
+    margin: 1.2rem 0;
+    color: #ffd700;
+    font-weight: 700;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    margin: 2rem 0;
+    font-size: 1rem;
+}
+
+.cart-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: auto;
+}
+
+.btn-pay, .btn-clear {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-pay {
+    background: linear-gradient(135deg, #ee2a5b, #c41e3a);
+    color: white;
+    box-shadow: 0 6px 15px rgba(238, 42, 91, 0.4);
+}
+
+.btn-pay:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(238, 42, 91, 0.6);
+}
+
+.btn-pay:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-clear {
+    background: #444;
+    color: #ccc;
+}
+
+.btn-clear:hover {
+    background: #666;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* SCROLLBAR */
+.cart-list::-webkit-scrollbar,
+.seats-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cart-list::-webkit-scrollbar-track,
+.seats-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cart-list::-webkit-scrollbar-thumb,
+.seats-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+@media (max-width: 992px) {
+    .hall-page {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .cart-section {
+        position: static;
+        max-height: none;
+    }
+    .seat {
+        width: 40px;
+        height: 40px;
+        font-size: 0.7rem;
+    }
+}

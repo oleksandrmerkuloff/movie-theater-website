@@ -69,7 +69,6 @@ class UserAdmin(BaseUserAdmin):
         ('Personal info', {'fields': [
             'email',
             'sex',
-            'status',
             'birthday',
             'client_type'
             ]}),

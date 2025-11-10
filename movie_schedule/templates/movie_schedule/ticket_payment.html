@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tickets Payment{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/ticket_payment.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="payment-page">
+    <h2>Payment</h2>
+    <p>Total: <strong>{{ total }} UAH</strong></p>
+
+    <form method="post" action="{% url 'ticket_payment' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-pay">Pay</button>
+    </form>
+</div>
+{% endblock %}

@@ -51,7 +51,26 @@
             <p id="description">{{ movie.description }}</p>
         </main>
         <aside id="col3">
-            <h1 style="text-align: center; margin-top: 50%; color: white">SHEDULE</h1>
+            <h3 style="text-align: center; margin: 1rem 0; color: #ffd700; font-size: 1.4rem;">SCHEDULE</h3>
+
+            {% if sessions_by_hall %}
+                <div class="schedule-container">
+                    {% for hall_name, sessions in sessions_by_hall.items %}
+                        <div class="hall-block">
+                            <div class="hall-name">{{ hall_name }}</div>
+                            <div class="time-links">
+                                {% for session in sessions %}
+                                    <a href="{% url 'hall' session.id %}" class="time-link">
+                                        {{ session.start_time|time:"H:i" }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="text-align: center; color: #aaa; margin-top: 2rem;">No sessions today</p>
+            {% endif %}
         </aside>
     </div>
 {% endblock %}

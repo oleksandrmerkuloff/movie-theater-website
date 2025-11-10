@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Hall - {{ session.movie.name }}{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/hall.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="hall-page">
+    <div class="hall-section">
+        <div class="hall-header">
+            <h2>{{ session.movie.name }}</h2>
+            <p>{{ session.start_at|date:"d M, H:i" }} | {{ session.hall.name }}</p>
+        </div>
+
+        <div class="screen">SCREEN</div>
+
+        <div class="seats-grid">
+            {% for row in "1234567890"|make_list %}
+                <div class="seat-row">
+                    {% for col in "1234567890"|make_list %}
+                        {% with row_num=forloop.parentloop.counter col_num=forloop.counter %}
+                            {% with seat_found=False %}
+                                {% for seat in session.seats.all %}
+                                    {% if seat.row == row_num and seat.seat == col_num and not seat_found %}
+                                        <div class="seat
+                                            {% if seat.is_booked %}booked
+                                            {% elif seat.id in selected_seat_ids %}selected
+                                            {% elif seat.is_premium %}premium{% endif %}"
+                                            data-row="{{ row_num }}"
+                                            data-seat="{{ col_num }}"
+                                            data-seat-id="{{ seat.id }}"
+                                            data-price="{% if seat.is_premium %}{{ session.price_premium }}{% else %}{{ session.price_standard }}{% endif %}">
+                                            {{ row_num }}-{{ col_num }}
+                                        </div>
+                                        {% with seat_found=True %}{% endwith %}
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% endwith %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="legend">
+            <span><span class="seat free"></span> Available</span>
+            <span><span class="seat booked"></span> Booked</span>
+            <span><span class="seat selected"></span> Selected</span>
+            <span><span class="seat premium"></span> Premium</span>
+        </div>
+    </div>
+
+    <div class="cart-section">
+        <h3>Your Selection</h3>
+    
+        <ul class="cart-list">
+            {% if cart %}
+                {% for item in cart %}
+                    <li class="cart-item">
+                        <span class="seat-label">R{{ item.row }}-S{{ item.seat }}</span>
+                        <span class="seat-price">{{ item.price }} UAH</span>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    
+        <div class="cart-total">
+            <strong>Total: <span id="total-price">{{ total_price|default:"0" }} UAH</span></strong>
+        </div>
+    
+        <p class="empty-cart" {% if cart %}style="display: none;"{% endif %}>
+            No seats selected.
+        </p>
+    
+        <form method="post" action="{% url 'hall' session.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="ticket_cart" id="ticket_cart_input">
+            <button type="submit" name="proceed_to_payment" class="btn-pay" {% if not cart %}disabled{% endif %}>
+                Pay Now
+            </button>
+            <button type="submit" name="clear_cart" class="btn-clear" {% if not cart %}style="display: none;"{% endif %}>
+                Clear Cart
+            </button>
+        </form>
+    </div>
+</div>
+<script src="{% static 'js/hall.js' %}"></script>
+{% endblock %}

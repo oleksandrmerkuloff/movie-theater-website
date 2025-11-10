@@ -94,3 +94,68 @@ body {
 .movie-data {
     color: rgba(255, 255, 255, .5);
 }
+
+.schedule-container {
+    padding: 0 1rem;
+    max-height: calc(100vh - 280px);
+    overflow-y: auto;
+}
+
+.hall-block {
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.hall-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.hall-name {
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.time-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.time-link {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 60px;
+    text-align: center;
+}
+
+.time-link:hover {
+    background: #ee2a5b;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(238, 42, 91, 0.3);
+}
+
+.schedule-container::-webkit-scrollbar {
+    width: 6px;
+}
+.schedule-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.schedule-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+}

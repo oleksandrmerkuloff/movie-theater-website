@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 from django.utils import timezone
 
+from collections import defaultdict
+
 from movies.models import Movie
 
 
@@ -20,16 +22,21 @@ class DetailMovieView(DetailView):
     model = Movie
     context_object_name = 'movie'
     template_name = 'movies/movie-page.html'
-    pk_url_kwarg = 'movie_id'  # ← tells Django to use movie_id from URL
+    pk_url_kwarg = 'movie_id'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         today = timezone.now().date()
-        context['sessions_today'] = self.object.sessions.filter(
+        sessions = self.object.movie_sessions.filter(  # ← ФИКС: movie_sessions
             start_time__date=today
-        ).order_by('start_time')
+        ).select_related('hall').order_by('hall__name', 'start_time')
 
+        sessions_by_hall = defaultdict(list)
+        for session in sessions:
+            sessions_by_hall[session.hall.name].append(session)
+
+        context['sessions_by_hall'] = dict(sessions_by_hall)
         return context
 
 

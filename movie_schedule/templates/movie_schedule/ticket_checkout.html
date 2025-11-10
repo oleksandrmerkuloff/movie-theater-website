@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tickets confirmation{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/ticket_checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="checkout-page">
+    <h2>Order confirmation</h2>
+    <p><strong>Movie:</strong> {{ session.movie.name }}</p>
+    <p><strong>Time:</strong> {{ session.start_time|date:"d M, H:i" }}</p>
+    <p><strong>Hall:</strong> {{ session.hall.name }}</p>
+
+    <h3>Ваши места:</h3>
+    <ul>
+        {% for item in cart %}
+            <li>R{{ item.row }}-S{{ item.seat }} — {{ item.price }} UAH</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Total: {{ total }} UAH</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-pay">Proceed to payment</button>
+        <a href="{% url 'hall' session.id %}" class="btn-back">Back</a>
+    </form>
+</div>
+{% endblock %}

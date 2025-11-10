@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Success!{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/ticket_success.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="success-page" style="text-align: center; padding: 3rem;">
+    <h1>Success!</h1>
+    <p>Your tickets have been reserved.</p>
+    <a href="{% url 'home' %}" class="btn-pay">Home</a>
+</div>
+{% endblock %}

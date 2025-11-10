@@ -5,14 +5,19 @@ from .models import Session, Seat
 
 
 @receiver(post_save, sender=Session)
-def create_seats(sender, instance, created, **kwargs):
+def create_hall_seats(sender, instance, created, **kwargs):
     if created:
-        for row in range(1, instance.hall.rows + 1):
-            for seat_num in range(1, instance.hall.seats_per_row + 1):
-                is_premium = row > (instance.hall.rows - 2)
-                Seat.objects.create(
-                    session=instance,
-                    row=row,
-                    seat=seat_num,
-                    is_premium=is_premium
+        seats = []
+        for row in range(1, 11):  # 1..10
+            for col in range(1, 11):
+                is_premium = row > 8  # 9 и 10 — премиум
+                seats.append(
+                    Seat(
+                        session=instance,
+                        row=row,
+                        seat=col,
+                        is_booked=False,
+                        is_premium=is_premium
+                    )
                 )
+        Seat.objects.bulk_create(seats)

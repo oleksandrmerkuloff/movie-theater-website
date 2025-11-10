@@ -39,6 +39,7 @@
     </header>
     {% block content %}
     {% endblock %}
+    <script>const csrfToken = "{{ csrf_token }}";</script>
     <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>
