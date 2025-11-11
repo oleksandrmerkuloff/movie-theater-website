@@ -14,7 +14,7 @@
     <p><strong>Time:</strong> {{ session.start_time|date:"d M, H:i" }}</p>
     <p><strong>Hall:</strong> {{ session.hall.name }}</p>
 
-    <h3>Ваши места:</h3>
+    <h3>Your seats:</h3>
     <ul>
         {% for item in cart %}
             <li>R{{ item.row }}-S{{ item.seat }} — {{ item.price }} UAH</li>

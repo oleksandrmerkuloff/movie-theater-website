@@ -1,11 +1,10 @@
-/* Pop-up styles */
 .popup {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #221f1f; /* Your dark theme */
+    background: #221f1f;
     color: #fff;
     padding: 30px;
     border-radius: 15px;
@@ -21,7 +20,7 @@
 }
 
 .popup button {
-    background: #ee2a5b; /* Your red accent */
+    background: #ee2a5b;
     color: #fff;
     border: none;
     padding: 10px 20px;

@@ -40,7 +40,6 @@ body {
     margin-bottom: 15px;
 }
 
-/* Form fields */
 .form-group {
     margin-bottom: 15px;
     display: flex;
@@ -67,7 +66,6 @@ input:focus {
     outline: 2px solid #10b981;
 }
 
-/* Button */
 .register-btn {
     width: 100%;
     padding: 12px;
@@ -85,7 +83,6 @@ input:focus {
     background: #059669;
 }
 
-/* Link to login */
 .login-text {
     margin-top: 20px;
     text-align: center;

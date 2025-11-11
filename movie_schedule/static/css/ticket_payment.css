@@ -1,100 +1,117 @@
 .payment-page {
-    max-width: 600px;
-    margin: 2rem auto;
+    max-width: 800px;
+    margin: 2.5rem auto;
     padding: 2.5rem;
-    background: #1a1a1a;
+    background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-    border: 1px solid #333;
-    color: #eee;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid #f0f0f0;
+    animation: fadeInUp 0.5s ease-out;
 }
 
 .payment-page h2 {
     text-align: center;
-    color: #ffd700;
-    margin-bottom: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 0.5px;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
-.payment-summary {
-    background: #221f1f;
-    padding: 1.5rem;
-    border-radius: 12px;
+.payment-page h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #ff3b30;
+    margin: 0.75rem auto 0;
+    border-radius: 2px;
+}
+
+.payment-page > p {
     text-align: center;
     font-size: 1.4rem;
-    color: #ffd700;
-    margin-bottom: 2rem;
-    font-weight: bold;
-}
-
-.payment-form {
-    background: #221f1f;
-    padding: 2rem;
-    border-radius: 12px;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.payment-form label {
-    display: block;
-    margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #ffd700;
-    font-size: 1.05rem;
+    color: #d32f2f;
+    margin: 0 0 2rem;
+    background: #fff8f6;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px dashed #ffcccc;
 }
 
-.payment-form input {
+.payment-page form p {
+    all: unset;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.payment-page form label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.payment-page form input {
     width: 100%;
-    padding: 0.9rem;
-    background: #333;
-    border: 1px solid #555;
-    border-radius: 8px;
-    color: white;
+    padding: 0.95rem 1rem;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: #fdfdfd;
+    box-sizing: border-box;
 }
 
-.payment-form input:focus {
+.payment-page form input:focus {
     outline: none;
-    border-color: #ffd700;
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
-    background: #3a3a3a;
+    border-color: #ff3b30;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.12);
 }
 
-.payment-form input::placeholder {
-    color: #888;
+.payment-page form .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    color: #d32f2f;
+    font-size: 0.9rem;
 }
 
 .btn-pay {
+    display: block;
     width: 100%;
     padding: 1.1rem;
-    margin-top: 1rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    cursor: pointer;
-    background: linear-gradient(135deg, #ee2a5b, #c41e3a);
+    margin-top: 1.5rem;
+    background: #ff3b30;
     color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 15px rgba(238, 42, 91, 0.4);
+    box-shadow: 0 4px 14px rgba(255, 59, 48, 0.3);
 }
 
 .btn-pay:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(238, 42, 91, 0.6);
+    background: #e32a2a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 59, 48, 0.4);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .payment-page {
         margin: 1rem;
-        padding: 1.5rem;
+        padding: 1.8rem;
+        border-radius: 14px;
     }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

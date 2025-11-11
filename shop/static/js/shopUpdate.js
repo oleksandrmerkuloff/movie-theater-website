@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         console.log("Cart confirmed:", cart);
 
-        // Send to Django backend
         fetch(CREATE_CART_URL, {
             method: "POST",
             headers: {
@@ -72,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Helper: CSRF for Django
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== "") {

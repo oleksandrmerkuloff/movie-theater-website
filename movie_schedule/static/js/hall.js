@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
         cartList.appendChild(fragment);
         totalPriceEl.textContent = `${total} UAH`;
 
-        // UI states
         if (emptyCartMsg) emptyCartMsg.style.display = 'none';
         if (payButton) payButton.disabled = false;
         if (clearButton) clearButton.style.display = 'block';
